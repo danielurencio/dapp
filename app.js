@@ -4,6 +4,9 @@ var engines = require('consolidate');
 var routes = require('./routes.js');
 var bodyParser = require('body-parser');
 
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -15,6 +18,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.use("/",routes);
 
-app.listen(3000,function() {
-  console.log("ready on 3000!");
+app.listen(port,ip,function() {
+  console.log('Server running on http://%s:%s', ip, port);
+
 });
