@@ -13,6 +13,7 @@
     "consolidate": "^0.15.1",
     "express": "^4.16.3",
     "mongodb": "^3.0.5",
+    "nodemailer": "^4.6.3",
     "nunjucks": "^3.1.2"
   }
 }

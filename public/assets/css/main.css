@@ -1,5 +1,5 @@
 @import url(font-awesome.min.css);
-@import url('https://fonts.googleapis.com/css?family=Satisfy|News+Cycle:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Satisfy|News+Cycle|Open+Sans+Condensed:300,400,700');
 /*
 	Eventually by HTML5 UP
 	html5up.net | @ajlkn
@@ -1048,7 +1048,7 @@
 
 /* Signup Form */
 
-	#signup-form {
+	.signup-form {
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
@@ -1056,40 +1056,40 @@
 		position: relative;
 	}
 
-		#signup-form input[type="text"],
-		#signup-form input[type="password"],
-		#signup-form input[type="email"] {
+		.signup-form input[type="text"],
+		.signup-form input[type="password"],
+		.signup-form input[type="email"] {
 			width: 18em;
 		}
 
-		#signup-form > * {
+		.signup-form > * {
 			margin: 0 0 0 1em;
 		}
 
-		#signup-form > :first-child {
+		.signup-form > :first-child {
 			margin: 0 0 0 0;
 		}
 
 		@media screen and (max-width: 480px) {
 
-			#signup-form {
+			.signup-form {
 				-moz-flex-direction: column;
 				-webkit-flex-direction: column;
 				-ms-flex-direction: column;
 				flex-direction: column;
 			}
 
-				#signup-form input[type="type"],
-				#signup-form input[type="password"],
-				#signup-form input[type="email"] {
+				.signup-form input[type="type"],
+				.signup-form input[type="password"],
+				.signup-form input[type="email"] {
 					width: 100%;
 				}
 
-				#signup-form > * {
+				.signup-form > * {
 					margin: 1.25em 0 0 0;
 				}
 
-				#signup-form .message {
+				.signup-form .message {
 					bottom: -1.5em;
 					font-size: 0.9em;
 					height: 1em;
@@ -1188,3 +1188,10 @@
 			}
 
 		}
+
+#online_span {
+  font-family:'Open Sans Condensed';
+  font-weight:300;
+  font-size:0.4em;
+  color:rgba(255,255,255,0.5);
+}

@@ -109,6 +109,12 @@
 	  var params = {};
           params.email = $("input[type='email']").val();
           params.pswd = $("input[type='password']").val();
-	  $.post("signup",params)
+
+	  $.post("signup",params,function(response) {
+	    if(response == "1") alert("Se guardó tu usuario.");
+	    if(response == "0") alert("El usuario ya existe.");
+
+	  });
+
         });
 })();
