@@ -1,8 +1,9 @@
 var express = require('express');
+var keyGen = require('./keyGen.js');
 var router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
-const dbName = 'myproject';
+const dbName = 'fondin';
 
 
 var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
@@ -52,17 +53,22 @@ router.get('/confirm',function(req,res) {
 
 
 
-router.post('/signup', function(req, res, next) {
+router.post('/signup', function(req, res) {
     // Use connect method to connect to the server
-    MongoClient.connect(mongoURL, function(err, client) {
-        const db = client//.db(dbName);
-        db.collection("inserts").findOne({ 'email':req.body.email }, function(err,doc) {
+    MongoClient.connect(url, function(err, client) {
+        const db = client.db(dbName);
+        db.collection("users").findOne({ 'email':req.body.email }, function(err,doc) {
 
 	    if(!doc) {
-                db.collection("inserts").insertOne(req.body,function(err,result) {
+		var obj = JSON.parse(JSON.stringify(req.body));
+		var token = keyGen();
+		obj.token = token;
+
+                db.collection("users").insertOne(obj, function(err,result) {
                     client.close();
 		    res.send("1");
                 });
+
 	    } else {
 		res.send("0");
 	    }
@@ -71,6 +77,20 @@ router.post('/signup', function(req, res, next) {
     });
 });
 
+
+
+router.get(/.*__$/,function(req,res) {
+
+  var token = req.path.substring(1);
+  db.collection("users").findOne({ 'token':token }, function(err,doc) {
+      if(doc) {
+        res.send(token);
+      } else {
+        res.send("NO existe esta página.");
+      }
+  });
+
+});
 
 
 //export this router to use in our index.js
