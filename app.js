@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var engines = require('consolidate');
-var routes = require('./routes.js');
+//var routes = require('./routes.js');
 var bodyParser = require('body-parser');
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000,
