@@ -55,7 +55,7 @@ router.get('/confirm',function(req,res) {
 router.post('/signup', function(req, res, next) {
     // Use connect method to connect to the server
     MongoClient.connect(mongoURL, function(err, client) {
-        const db = client.db(dbName);
+        const db = client//.db(dbName);
         db.collection("inserts").findOne({ 'email':req.body.email }, function(err,doc) {
 
 	    if(!doc) {
