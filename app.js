@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var engines = require('consolidate');
-//var routes = require('./routes.js');
+var routes = require('./routes.js');
 var bodyParser = require('body-parser');
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
@@ -16,8 +16,7 @@ app.set('view engine','html');
 app.set('views',__dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
-app.get("/",function(req,res) { res.send("hola"); });
-//app.use("/",routes);
+app.use("/",routes);
 
 app.listen(port,ip,function() {
   console.log('Server running on http://%s:%s', ip, port);
