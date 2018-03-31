@@ -12,7 +12,7 @@
     "mongodb": "^3.0.5",
     "nodemailer": "^4.6.3",
     "nunjucks": "^3.1.2"
-  }
+  },
   "scripts": {
     "start":"node app.js"
   }
