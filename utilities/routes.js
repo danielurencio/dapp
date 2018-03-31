@@ -80,14 +80,17 @@ router.post('/signup', function(req, res) {
 
 
 router.get(/.*__$/,function(req,res) {
-
   var token = req.path.substring(1);
-  db.collection("users").findOne({ 'token':token }, function(err,doc) {
-      if(doc) {
-        res.send(token);
-      } else {
-        res.send("NO existe esta página.");
-      }
+
+  MongoClient.connect(url,function(err,client) {
+      const db = client.db(dbName);
+      db.collection("users").findOne({ 'token':token }, function(err,doc) {
+          if(doc) {
+            res.send(token);
+          } else {
+            res.send("NO existe esta página.");
+          }
+      });
   });
 
 });
