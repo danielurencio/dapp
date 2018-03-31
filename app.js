@@ -22,12 +22,4 @@ app.use(express.static(__dirname + '/public'));
 
 app.use("/",routes);
 
-if(production) {
-  https.createServer({
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert')
-  }, app).listen(port, ip, function () {
-    console.log('listening on ' + port);
-  }) } else {
-  app.listen(3000,function() { console.log("development on 3000!"); });
-}
+app.listen(port,ip,function() { console.log("LISTENING ON " + ip + "/" + port); });
