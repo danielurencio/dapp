@@ -1,11 +1,15 @@
+var https = require('https');
+var fs = require('fs');
 var express = require('express');
 var app = express();
 var engines = require('consolidate');
 var routes = require('./routes.js');
 var bodyParser = require('body-parser');
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8081,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+
+var production = true;
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,7 +22,12 @@ app.use(express.static(__dirname + '/public'));
 
 app.use("/",routes);
 
-app.listen(port,ip,function() {
-  console.log('Server running on http://%s:%s', ip, port);
-
-});
+if(production) {
+  https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert')
+  }, app).listen(port, function () {
+    console.log('listening on ' + port);
+  }) } else {
+  app.listen(3000,function() { console.log("development on 3000!"); });
+}
