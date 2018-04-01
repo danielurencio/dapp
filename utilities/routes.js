@@ -61,7 +61,7 @@ router.post('/signup', function(req, res) {
 
 	    if(!doc) {
 		var obj = JSON.parse(JSON.stringify(req.body));
-		var token = keyGen();
+		var token = obj.email.replace(/@|\./g,'') + keyGen();
 		obj.token = token;
 
                 db.collection("users").insertOne(obj, function(err,result) {
@@ -86,7 +86,13 @@ router.get(/.*__$/,function(req,res) {
       const db = client.db(dbName);
       db.collection("users").findOne({ 'token':token }, function(err,doc) {
           if(doc) {
-            res.send(token);
+	    delete doc.token;
+	    doc.activated = true;
+
+	    db.collection("users").update({ 'token':token }, doc, function() {
+              res.send(token);
+	    });
+
           } else {
             res.send("NO existe esta página.");
           }
@@ -96,5 +102,5 @@ router.get(/.*__$/,function(req,res) {
 });
 
 
-//export this router to use in our index.js
+//export this router to use in app.js
 module.exports = router;
