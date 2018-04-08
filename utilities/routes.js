@@ -1,5 +1,6 @@
 var express = require('express');
 var keyGen = require('./keyGen.js');
+var transporter = require('./transporter.js');
 var router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
@@ -66,6 +67,23 @@ router.post('/signup', function(req, res) {
 
                 db.collection("users").insertOne(obj, function(err,result) {
                     client.close();
+
+		    var mailOptions = {
+		      from: 'fondin.authorization@gmail.com',
+		      to: obj.email,
+		      subject: 'Authenticate your account',
+		      text: 'localhost:8081/' + token
+		    };
+
+		    transporter.sendMail(mailOptions, function(error, info){
+		      if (error) {
+		        console.log(error);
+		      } else {
+		        console.log('Email sent: ' + info.response);
+		      }
+		    });
+
+
 		    res.send("1");
                 });
 
