@@ -1,17 +1,38 @@
 $(document).ready(function() {  
 
   $('div.addSection').on('click',function() {
+    var sections = ['Text','Image','Video','HTML'];
+
+    var width = String(100 / sections.length) + '%';
     var height = $(this).css("height");
-    var child = '<div class="form" style="height:'+ height + ';">'+
-			'<select>' +
-			  '<option>hola</option>' +
-			  '<option>hola</option>' +
-			'</select>' +
-		'</div>'+
-		'<div class="delete" style="height:' + height + '"></div>';
-    $(this).text("d");
-    $(this).html(child)
+    var containerStyle = 'style="height:'+ '100%' +';width:'+ width +
+							';display:table-cell;"';
+
+    var sectionContainer = sections.map(function(d) {
+	return '<div '+ containerStyle +' class="container">'+ d +'</div>'
+    }).join('');
+
+    var child = '<div style="display:table;width:100%;height:'+ height +'">' +
+		  '<div style="height:100%;display:table-cell;width:calc(100% - '
+								      + height + ')">'+
+			'<div style="display:table;width:100%;height:100%;">' +
+				sectionContainer +
+			'</div>' +
+		  '</div>' +
+		  '<div id="undo" style="background:red;display:table-cell;width:'
+									+ height +'">'+
+		  '</div>' +
+	        '</div>';
+
+    $(this).text('');
+    $(this).attr('class','chooseContent');
+    $(this).html(child);
   });
 
+
+  $('div#undo').on('click',function() {
+    console.log([this]);
+    $(this.parentNode).html('<div class="addSection">&oplus;</div>')
+  });
 
 })

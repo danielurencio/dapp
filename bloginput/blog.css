@@ -42,7 +42,7 @@ div#projectTitle>textarea {
   text-align:center;
 }
 
-div.addSection {
+div.addSection,div.chooseContent {
   display:table;
   margin-top:40px;
   text-align:center;
@@ -53,6 +53,12 @@ div.addSection {
   border: 1px dashed lightGray;
 }
 
+div.chooseContent>div {
+  font-family:'Work Sans';
+  font-size:30px;
+  font-weight:800;
+}
+
 div.addSection:hover {
   cursor:pointer;
   background-color:lightGreen;
@@ -60,16 +66,11 @@ div.addSection:hover {
   border:1px solid transparent;
 }
 
-div.form {
-  display:table-cell;
-  background-color:red;
-  width:75%;
-}
-
-div.delete {
-  display:table-cell;
-  background-color:black;
-  width:25%;
+div.chooseContent>div .container:hover {
+  cursor:pointer;
+  background-color:rgb(52,219,255);
+  color:white;
+  transition: background-color 1s ease;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
