@@ -1,5 +1,10 @@
 $(document).ready(function() {  
+  sectionFunctionality()
+})
 
+
+
+function sectionFunctionality() {
   $('div.addSection').on('click',function() {
     var sections = ['Text','Image','Video','HTML'];
 
@@ -27,12 +32,13 @@ $(document).ready(function() {
     $(this).text('');
     $(this).attr('class','chooseContent');
     $(this).html(child);
+
+    $('div#undo').on('click',function() {
+      this.parentNode.parentNode.parentNode
+	      .innerHTML = '<div class="addSection">&oplus;</div>';
+
+      sectionFunctionality();
+    });
+
   });
-
-
-  $('div#undo').on('click',function() {
-    console.log([this]);
-    $(this.parentNode).html('<div class="addSection">&oplus;</div>')
-  });
-
-})
+}
