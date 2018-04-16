@@ -73,6 +73,10 @@ div.chooseContent>div .container:hover {
   transition: background-color 1s ease;
 }
 
+div#selectedContainer {
+  border: 1px solid red;
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     opacity: 1; /* Firefox */
 }
